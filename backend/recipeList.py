@@ -9,7 +9,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 parser = StrOutputParser()
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", api_key=GEMINI_API_KEY)
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-002", api_key=GEMINI_API_KEY)
 
 ingredients = "eggs, onions, tomatoes, bell peppers, cheese, milk, corn, brocolli, bread"
 
