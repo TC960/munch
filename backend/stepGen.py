@@ -11,12 +11,10 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 parser = StrOutputParser()
 llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-002", api_key=GEMINI_API_KEY)
 
-recipe = "Cheese Quesadilla with Corn and Peppers"
-ingredients = "eggs, onions, tomatoes, bell peppers, cheese, milk, corn, brocolli, bread"
+recipe = "Enchiladas with black beans and sweet potato"
+ingredients = '["cut and peel carrots","brussels sprouts","sweet potatoes","romaine hearts","shishito peppers","cauliflower","peanut butter filled pretzel nuggets","blueberries","raspberries","dark sweet cherries","jasmine rice","whole wheat tortillas","farro","nonfat greek yogurt","high protein organic tofu","soy sauce","enchilada sauce","black beans","garbanzo beans","apples","bananas"]'
 
-template = """You are a generative AI model with ubiquitous knowledge all possible 
- recipes using all sorts of combinations of foods. You are also very clear, coherent
- and concise with the way you respond, not giving too much bullshit.
+template = """
  Give a 1-2 line description of the dish
  Detail the recipe to bake this item, for a serving size of one person. Include item names and quantities for the recipe.
  The recipe that I need instructions for is {recipe},
@@ -30,7 +28,7 @@ template = """You are a generative AI model with ubiquitous knowledge all possib
     <ingredient name>: <quantity>,
   }},
   "instructions": [
-    <as strings>,
+    <strings>,
   ]
 }}
 """
