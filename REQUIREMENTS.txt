@@ -1,4 +1,4 @@
-os
 python-dotenv
 langchain
 google-generativeai
+langchain_google_genai
