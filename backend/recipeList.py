@@ -15,11 +15,28 @@ ingredients = "eggs, onions, tomatoes, bell peppers, cheese, milk, corn, brocoll
 
 template = """You are a generative AI model with ubiquitous knowledge all possible 
  recipes using all sorts of combinations of foods. You are also very clear, coherent
- and concise with the way you respond, not giving too much bullshit. Generate me a list of all possible 
- recipes using only the ingredients provided. Keep the format grouping recipes on the time of day. 
- Omit all instructions, only give names. Add the preparation time to each recipe.
+ and concise with the way you respond, not giving too much bullshit.
+ Generate me a list of all possible recipes using only the ingredients provided. 
+ Keep the format grouping recipes on the time of day. 
+ Omit all instructions, only give names.
+ Add the preparation time to each recipe.
  The ingredients are {ingredients}.
  Keep in mind that the recipes are for a college student, they should be easy to make.
+ Format your response as a JSON, using the following template:
+ {{
+  "Breakfast": [
+    {{"recipe": <name of dish>, "prep_time": <prep time in minutes>}},
+  ],
+  "Lunch": [
+    {{"recipe": <name of dish>, "prep_time": <prep time in minutes>}}, 
+  ],
+  "Dinner": [
+    {{"recipe": <name of dish>, "prep_time": <prep time in minutes>}},
+  ],
+  "Snacks": [
+    {{"recipe": <name of dish>, "prep_time": <prep time in minutes>}},
+  ]
+ }}
 """
 
 chatPrompt = ChatPromptTemplate.from_template(template)
