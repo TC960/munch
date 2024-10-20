@@ -15,6 +15,7 @@ def get_recipe_list():
 
 @app.route('/get_instructions', methods=['POST'])
 def get_instructions():
+    global final_steps
     data = request.get_json()
     recipe = data.get('recipe')
     ingredients = data.get('ingredients')
