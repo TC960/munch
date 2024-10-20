@@ -5,7 +5,7 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 def generate_recipe_list(filepath):
     model = genai.GenerativeModel("gemini-1.5-pro-002")
-    file = genai.upload_file(filepath)
+    file = genai.upload_file(filepath, mime_type="image/jpeg")
     template = '''
     Generate a list of all possible recipes using only the ingredients in the image.
     Group recipes by time of day.
