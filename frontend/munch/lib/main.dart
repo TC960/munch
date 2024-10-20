@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert'; // required to encode/decode json data
 import 'package:http/http.dart' as http;
+import 'package:munch/show_steps.dart';
 import 'string_extensions.dart';
 
 void main() {
@@ -90,47 +91,59 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  ingredients = [];
-                  breakfast = [];
-                  lunch = [];
-                  dinner = [];
-                  snacks = [];
-                });
-                fetchRecipeList(() {
-                  setState(() {});
-                  Navigator.pop(context);
-                  showModalBottomSheet(
-                    context: context,
-                    builder: buildBottomSheet,
-                    isScrollControlled: true,
-                    showDragHandle: true,
-                    enableDrag: true,
-                    useSafeArea: true,
-                  );
-                });
-                showModalBottomSheet(
-                  context: context,
-                  builder: buildBottomSheet,
-                  isScrollControlled: true,
-                  showDragHandle: true,
-                  enableDrag: true,
-                  useSafeArea: true,
-                );
-              },
-              child: Image.asset(
-                'images/shutter_button.png',
-                width: 88,
-                height: 88,
-              ),
-            )
-          ],
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/groceries2.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(96.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      ingredients = [];
+                      breakfast = [];
+                      lunch = [];
+                      dinner = [];
+                      snacks = [];
+                    });
+                    fetchRecipeList(() {
+                      setState(() {});
+                      Navigator.pop(context);
+                      showModalBottomSheet(
+                        context: context,
+                        builder: buildBottomSheet,
+                        isScrollControlled: true,
+                        showDragHandle: true,
+                        enableDrag: true,
+                        useSafeArea: true,
+                      );
+                    });
+                    showModalBottomSheet(
+                      context: context,
+                      builder: buildBottomSheet,
+                      isScrollControlled: true,
+                      showDragHandle: true,
+                      enableDrag: true,
+                      useSafeArea: true,
+                    );
+                  },
+                  child: Image.asset(
+                    'images/shutter_button.png',
+                    width: 88,
+                    height: 88,
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -168,15 +181,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => InstructionsPage(
-                      //               title: 'Munch',
-                      //               recipe:
-                      //                   category[index]['recipe'].toString(),
-                      //               ingredients: ingredients,
-                      //             )));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShowSteps(
+                                recipe: category[index]['recipe'].toString(),
+                                detectedIngredients: ingredients)),
+                      );
                     },
                     title: Text(
                         category[index]['recipe'].toString().toTitleCase()),
