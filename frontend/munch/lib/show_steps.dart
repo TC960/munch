@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'dart:convert'; // required to encode/decode json data
 import 'package:http/http.dart' as http;
 import 'string_extensions.dart';
+import 'package:munch/instructions.dart';
 
 class ShowSteps extends StatefulWidget {
   const ShowSteps(
@@ -144,7 +143,18 @@ class _ShowStepsState extends State<ShowSteps> {
                 ],
               ),
             ),
-            FilledButton(onPressed: () {}, child: const Text("Voice Guidance"))
+            FilledButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InstructionsPage(
+                            recipe: widget.recipe.toString(),
+                            ingredients: ingredients,
+                            steps: instructions)),
+                  );
+                },
+                child: const Text("Voice Guidance"))
           ],
         ),
       );
